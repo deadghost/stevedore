@@ -2,13 +2,6 @@
 
 Stevedore is a DSL for generating shell scripts using clojure.
 
-
-See [reference documentation](http://palletops.com/doc/reference/0.8/script/),
-[api documentation](http://pallet.github.com/stevedore/autodoc/index.html)
-and [annotated source](http://pallet.github.com/stevedore/marginalia/uberdoc.html).
-
-See [tests](https://github.com/pallet/stevedore/tree/develop/test/pallet/stevedore) for usage examples.
-
 ## Why?
 
 While there is nothing wrong with normal shell scripting, Stevedore allows the
@@ -47,6 +40,14 @@ Installation is with lein or your favourite maven repository aware build tool.
   </repository>
 </repositories>
 ```
+
+## Documentation
+
+See [reference documentation](http://palletops.com/doc/reference/0.8/script/),
+[api documentation](http://pallet.github.com/stevedore/autodoc/index.html)
+and [annotated source](http://pallet.github.com/stevedore/marginalia/uberdoc.html).
+
+See [tests](https://github.com/pallet/stevedore/tree/develop/test/pallet/stevedore) for usage examples.
 
 ## License
 
