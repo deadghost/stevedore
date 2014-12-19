@@ -9,6 +9,13 @@ and [annotated source](http://pallet.github.com/stevedore/marginalia/uberdoc.htm
 
 See [tests](https://github.com/pallet/stevedore/tree/develop/test/pallet/stevedore) for usage examples.
 
+## Why?
+
+While there is nothing wrong with normal shell scripting, Stevedore allows the
+ability to easily interpolate clojure values. As a consequence, we gain the
+benefits of being able to flexibly parameterize scripts and tailor them to
+target specific operating systems and their versions.
+
 ## Installation
 
 stevedore is distributed as a jar, and is available in the
