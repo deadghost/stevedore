@@ -11,7 +11,7 @@ target specific operating systems and their versions.
 
 ## Installation
 
-stevedore is distributed as a jar, and is available in the
+Stevedore is distributed as a jar, and is available in the
 [clojars repository](http://clojars.org/com.palletops/stevedore).
 
 Installation is with lein or your favourite maven repository aware build tool.
