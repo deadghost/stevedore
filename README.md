@@ -1,6 +1,6 @@
 # pallet.stevedore
 
-An embedding of shell script in clojure.
+Stevedore is a DSL for generating shell scripts using clojure.
 
 
 See [reference documentation](http://palletops.com/doc/reference/0.8/script/),
