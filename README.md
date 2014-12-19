@@ -48,6 +48,11 @@ and [annotated source](http://pallet.github.com/stevedore/marginalia/uberdoc.htm
 
 See [tests](https://github.com/pallet/stevedore/tree/develop/test/pallet/stevedore) for usage examples.
 
+## Support
+
+- [Google Groups](http://groups.google.com/group/pallet-clj)
+- [IRC](http://webchat.freenode.net/?channels=pallet)
+
 ## License
 
 Licensed under [EPL](http://www.eclipse.org/legal/epl-v10.html)
