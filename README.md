@@ -43,8 +43,7 @@ Installation is with lein or your favourite maven repository aware build tool.
 
 ## Documentation
 
-See [reference documentation](http://palletops.com/doc/reference/0.8/script/),
-[api documentation](http://pallet.github.com/stevedore/autodoc/index.html)
+See [api documentation](http://pallet.github.com/stevedore/autodoc/index.html)
 and [annotated source](http://pallet.github.com/stevedore/marginalia/uberdoc.html).
 
 See [tests](https://github.com/pallet/stevedore/tree/develop/test/pallet/stevedore) for usage examples.
