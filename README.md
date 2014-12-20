@@ -41,6 +41,199 @@ Installation is with lein or your favourite maven repository aware build tool.
 </repositories>
 ```
 
+## Examples
+
+### Basic Usage
+
+Let's write a basic script; nothing fancy just a plain ole' thing you can
+easily write in your scripting language of choice. Very static.
+
+```clojure
+(use 'pallet.stevedore)
+
+(print
+ (with-script-language :pallet.stevedore.bash/bash
+   (script
+    ("ls" "/some/path")
+    (defvar x 1)
+    (println @x)
+    (defn foo [x] ("ls" @x))
+    ("foo" 1)
+    (if (= a a)
+      (println "Reassuring")
+      (println "Ooops"))
+    (println "I am" @("whomai")))))
+```
+
+Outputs:
+```bash
+    # form-init7685875326394262653.clj:2
+ls /some/path
+    # form-init7685875326394262653.clj:3
+x=1
+    # form-init7685875326394262653.clj:4
+echo ${x}
+foo() {
+x=$1
+    # form-init7685875326394262653.clj:5
+ls ${x}
+}
+    # form-init7685875326394262653.clj:6
+foo 1
+    # form-init7685875326394262653.clj:7
+if [ "a" == "a" ]; then echo Reassuring;else echo Ooops;fi
+    # form-init7685875326394262653.clj:10
+echo I am $(whomai)
+```
+
+### Interpolating Clojure
+
+Here is where we start seeing some power. Notice everything escaped with `~`
+gets evaluated as clojure code before becoming parts of arguments for `script`.
+
+```clojure
+(print
+ (with-script-language :pallet.stevedore.bash/bash
+   (let [path "/some/path"]
+     (script
+      ("ls" ~path)
+      ("ls" ~(.replace path "some" "other"))))))
+```
+
+Outputs:
+
+```bash
+    # form-init7685875326394262653.clj:6
+ls /some/path
+    # form-init7685875326394262653.clj:7
+ls /other/path
+```
+
+### Generating Scripts
+
+That's cool, but here's one better. Let's do the same thing as the previous
+snippet but let's generate the script using a function that takes a path as an
+argument. This lets us generate a slightly different script with each new
+argument.
+
+```clojure
+(defn list-path [path]
+  "Replaces the \"some\" portion of path argument with the \"other\" string."
+  (script
+   ("ls" ~path)
+   ("ls" ~(.replace path "some" "other"))))
+
+(print (with-script-language :pallet.stevedore.bash/bash
+         (list-path "/some/path")))
+```
+
+Outputs:
+
+```bash
+    # form-init7685875326394262653.clj:7
+ls /some/path
+    # form-init7685875326394262653.clj:8
+ls /other/path
+```
+
+```clojure
+(print (with-script-language :pallet.stevedore.bash/bash
+         (list-path "/some/different/path")))
+```
+
+Outputs:
+
+```bash
+    # form-init7685875326394262653.clj:7
+ls /some/different/path
+    # form-init7685875326394262653.clj:8
+ls /other/different/path
+```
+
+### Composing Scripts
+
+Concatenate scripts together using `do-script`.
+
+```clojure
+(print (with-script-language :pallet.stevedore.bash/bash
+		 (do-script
+          (list-path "/some/path")
+          (list-path "/some/different/path"))))
+```
+
+Outputs:
+
+```bash
+# form-init7685875326394262653.clj:5
+ls /some/path
+    # form-init7685875326394262653.clj:6
+ls /other/path
+# form-init7685875326394262653.clj:5
+ls /some/different/path
+    # form-init7685875326394262653.clj:6
+ls /other/different/path
+```
+
+Chain scripts together with `&&` using `chained-script`.
+
+```clojure
+(print (with-script-language :pallet.stevedore.bash/bash
+		 (chained-script
+          (list-path "/some/path")
+          (list-path "/some/different/path"))))
+```
+
+Outputs:
+
+```bash
+# form-init7685875326394262653.clj:4
+    # form-init7685875326394262653.clj:5
+ls /some/path
+    # form-init7685875326394262653.clj:6
+ls /other/path && \
+# form-init7685875326394262653.clj:5
+    # form-init7685875326394262653.clj:5
+ls /some/different/path
+    # form-init7685875326394262653.clj:6
+ls /other/different/path
+```
+
+Chain your scripts and exit if the chain fails using `checked-script`.
+
+```clojure
+(print (with-script-language :pallet.stevedore.bash/bash
+		 (checked-script
+          (list-path "/some/path")
+          (list-path "/some/different/path"))))
+```
+
+Outputs:
+
+```bash
+echo '    # form-init7685875326394262653.clj:5
+ls /some/path
+    # form-init7685875326394262653.clj:6
+ls /other/path
+...';
+{
+    # form-init7685875326394262653.clj:5
+    # form-init7685875326394262653.clj:5
+ls /some/different/path
+    # form-init7685875326394262653.clj:6
+ls /other/different/path
+
+ } || { echo '#>     # form-init7685875326394262653.clj:5
+ls /some/path
+    # form-init7685875326394262653.clj:6
+ls /other/path
+ : FAIL'; exit 1;} >&2 
+echo '#>     # form-init7685875326394262653.clj:5
+ls /some/path
+    # form-init7685875326394262653.clj:6
+ls /other/path
+ : SUCCESS'
+```
+
 ## Documentation
 
 See [api documentation](http://pallet.github.com/stevedore/autodoc/index.html)
