@@ -113,7 +113,7 @@ ls /other/path
 
 That's cool, but here's one better. Let's do the same thing as the previous
 snippet but let's generate the script using a function that takes a path as an
-argument. This lets us generate a slightly different script with each new
+argument. This lets us generate a slightly different script with each different
 argument.
 
 ```clojure
