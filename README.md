@@ -234,12 +234,12 @@ ls /other/path
  : SUCCESS'
 ```
 
-## Documentation
+## Further Reading
 
-See [api documentation](http://pallet.github.com/stevedore/autodoc/index.html)
-and [annotated source](http://pallet.github.com/stevedore/marginalia/uberdoc.html).
-
-See [tests](https://github.com/pallet/stevedore/tree/develop/test/pallet/stevedore) for usage examples.
+- [More examples and explanations](http://palletops.com/pallet/doc/reference/0.8/script/)
+- [API documentation](http://pallet.github.com/stevedore/autodoc/index.html)
+- [Annotated source](http://pallet.github.com/stevedore/marginalia/uberdoc.html)
+- [More usage examples(tests)](https://github.com/pallet/stevedore/tree/develop/test/pallet/stevedore)
 
 ## Support
 
