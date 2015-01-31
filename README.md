@@ -50,6 +50,7 @@ easily write in your scripting language of choice. Very static.
 
 ```clojure
 (use 'pallet.stevedore)
+(require 'pallet.stevedore.bash)
 
 (print
  (with-script-language :pallet.stevedore.bash/bash
